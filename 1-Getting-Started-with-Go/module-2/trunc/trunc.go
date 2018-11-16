@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"strconv"
-	//"math"
 	"strings"
 )
 
@@ -15,23 +14,20 @@ removing the digits to the right of the decimal place.
 */
 func main() {
 	var userInput string
-	fmt.Println("Please enter a floating point number")
-	_, err := fmt.Scanln(&userInput)
-	if err != nil {
-		fmt.Println("Invalid input")
+	fmt.Printf("Please enter a floating point number: ")
+	if _, err := fmt.Scanln(&userInput); err != nil {
 		fmt.Println(err)
 		return
 	}
-	splitInput := strings.SplitN(userInput, ".", 1)
-	fmt.Printf("%v", splitInput)
+	if _, err := strconv.ParseFloat(userInput, 64); err != nil {
+		fmt.Println(err)
+		return
+	}
+	splitInput := strings.SplitN(userInput, ".", 2)
 	castAsInt, err := strconv.Atoi(splitInput[0])
 	if err != nil {
-		fmt.Println("Invalid input")
 		fmt.Println(err)
 		return
 	}
-
-	/*floored := math.Floor(userInput)
-	castAsInt := int(floored)*/
 	fmt.Printf("%d\n", castAsInt)
 }
