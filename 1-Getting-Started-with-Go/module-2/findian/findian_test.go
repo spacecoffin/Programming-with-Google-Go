@@ -14,9 +14,9 @@ func TestFindian(t *testing.T) {
 	positiveTestCases := [4]string{"ian", "Ian", "iuiygaygn", "I d skd a efju N"}
 	negativeTestCases := [3]string{"ihhhhhn", "ina", "xian"}
 	for _, testCase := range positiveTestCases {
-		assert.Equal(findian(testCase), "Found!", "These cases are positive.")
+		assert.Equal(Findian(testCase), "Found!", "These cases are positive.")
 	}
 	for _, testCase := range negativeTestCases {
-		assert.Equal(findian(testCase), "Not Found!", "These cases are negative.")
+		assert.Equal(Findian(testCase), "Not Found!", "These cases are negative.")
 	}
 }
