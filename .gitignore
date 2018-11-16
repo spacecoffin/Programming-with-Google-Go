@@ -1,7 +1,3 @@
-# go build binaries
-hello-world
-trunc
-
 *.asc
 
 # Binaries for programs and plugins
