@@ -15,7 +15,7 @@ Write a program which prompts the user to enter integers and stores the integers
 */
 func main() {
 	var userInput string
-	slice := make([]int, 3)
+	slice := make([]int, 0, 3)
 
 	for {
 		printPrompt()
@@ -31,7 +31,7 @@ func main() {
 		enteredInt, err := strconv.Atoi(userInput)
 		if err != nil {
 			fmt.Println(err)
-			break
+			continue
 		}
 		slice = append(slice, enteredInt)
 		if !sort.SliceIsSorted(slice, func(i int, j int) bool { return slice[i] < slice[j] }) {
