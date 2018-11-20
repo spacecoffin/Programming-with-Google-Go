@@ -12,6 +12,7 @@ Write a program which prompts the user to first enter a name, and then enter an 
 */
 func main() {
 	// var personName, personAddress string
+	var unmarshalledMap map[string]string
 	personMap := make(map[string]string)
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Please enter a name: ")
@@ -33,5 +34,10 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(barr)
+	fmt.Printf("\nJSON object as bytes:\n%v\n", barr)
+	if err := json.Unmarshal(barr, &unmarshalledMap); err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf("\nUnmarshalled JSON as Go object:\n%v\n", unmarshalledMap)
 }
