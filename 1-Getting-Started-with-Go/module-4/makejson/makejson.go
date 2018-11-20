@@ -7,12 +7,17 @@ import (
 	"os"
 )
 
+// Person struct to unmarshall JSON into
+type Person struct {
+	Name    string
+	Address string
+}
+
 /*
 Write a program which prompts the user to first enter a name, and then enter an address. Your program should create a map and add the name and address to the map using the keys "name" and "address", respectively. Your program should use Marshal() to create a JSON object from the map, and then your program should print the JSON object.
 */
 func main() {
-	// var personName, personAddress string
-	var unmarshalledMap map[string]string
+	var person Person
 	personMap := make(map[string]string)
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Please enter a name: ")
@@ -34,10 +39,9 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	fmt.Printf("\nJSON object as bytes:\n%v\n", barr)
-	if err := json.Unmarshal(barr, &unmarshalledMap); err != nil {
+	if err := json.Unmarshal(barr, &person); err != nil {
 		fmt.Println(err)
 		return
 	}
-	fmt.Printf("\nUnmarshalled JSON as Go object:\n%v\n", unmarshalledMap)
+	fmt.Printf("\nUnmarshalled JSON as Go object:\n%+v\n", person)
 }
