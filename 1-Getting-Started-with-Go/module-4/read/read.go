@@ -42,6 +42,6 @@ func main() {
 		nameList = append(nameList, lineName)
 	}
 	for _, name := range nameList {
-		fmt.Printf("First: %s\nLast:  %s\n\n", name.fname, name.lname)
+		fmt.Printf("%s\n%s\n\n", name.fname, name.lname)
 	}
 }
