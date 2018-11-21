@@ -1,15 +1,16 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"io"
 	"os"
-	)
+	"strings"
+)
 
 // Name struct
 type Name struct {
 	fname string
-	lname  string
+	lname string
 }
 
 /*
@@ -18,71 +19,6 @@ Write a program which reads information from a file and represents it in a slice
 Your program will define a name struct which has two fields, fname for the first name, and lname for the last name. Each field will be a string of size 20 (characters).
 
 Your program should prompt the user for the name of the text file. Your program will successively read each line of the text file and create a struct which contains the first and last names found in the file. Each struct created will be added to a slice, and after all lines have been read from the file, your program will have a slice containing one struct for each line in the file. After reading all lines from the file, your program should iterate through your slice of structs and print the first and last names found in each struct.
-*/
-
-const NoSpaceError = "No space found after first name."
-
-func isSpace(r rune) bool {
-	if r == ' ' {
-		return true
-	}
-	return false
-}
-
-func isNewline(r rune) bool {
-	switch r {
-	case '\n', '\r':
-		return true
-	}
-	return false
-}
-
-func findSep(barr []byte, sepComp func(r rune) bool) {
-	for index, char := range(fBarr) {
-		if char == space {
-
-		}
-	}
-}
-
-func readFirst(fileHandle os.File) (string, error) {
-	var
-	fBarr := make([]byte, 0, 21)
-	nBytesRead, err := fileHandle.read(fBarr)
-	if err != nil {
-		return nil, err
-	}
-
-
-	if string(fBarr[nBytesRead]) != " " {
-		return nil, NoSpaceError
-	}
-	fString := string(fBarr[:nBytesRead])
-	return fString, nil
-}
-
-func readLast(fileHandle os.File) (string, error) {
-	fBarr := make([]byte, 0, 21)
-	nBytesRead, err := fileHandle.read(fBarr)
-	if err != nil & err != io.EOF{
-		return nil, err
-	}
-	if string(fBarr[nBytesRead]) != " " {
-		return nil, NoSpaceError
-	}
-	fString := string(fBarr[:nBytesRead])
-	return fString, nil
-}
-
-func readLine(fileHandle os.File) (Name, error) {
-	fBarr := [20]byte
-
-	lBarr := [20]byte
-
-}
-
-/*
-I decided to complete this assignment with the fewest possible imports. Maybe I miss my university days of writing C.
 */
 func main() {
 	var nameList []Name // slice of name structs
@@ -98,7 +34,14 @@ func main() {
 		return
 	}
 	defer f.Close()
-
-
-
+	scanner := bufio.NewScanner(bufio.NewReader(f))
+	for scanner.Scan() {
+		line := scanner.Text()
+		splitLine := strings.SplitN(line, " ", 2)
+		lineName := Name{fname: splitLine[0], lname: splitLine[1]}
+		nameList = append(nameList, lineName)
+	}
+	for _, name := range nameList {
+		fmt.Printf("First: %s\nLast:  %s\n\n", name.fname, name.lname)
+	}
 }
